@@ -1,0 +1,26 @@
+local Players = game:GetService("Players")
+
+local ADMINS = {
+    ["0mygodin"] = true
+}
+
+local MAX_POWER = 10000
+local MAX_LEVEL = 100
+
+local function setMaxStats(player)
+    local stats = player:FindFirstChild("leaderstats")
+    if not stats then return end
+
+    local power = stats:FindFirstChild("Power")
+    local level = stats:FindFirstChild("Level")
+
+    if power then power.Value = MAX_POWER end
+    if level then level.Value = MAX_LEVEL end
+end
+
+Players.PlayerAdded:Connect(function(player)
+    if ADMINS[player.Name] then
+        -- Automatically give max stats for testing
+        setMaxStats(player)
+    end
+end)
